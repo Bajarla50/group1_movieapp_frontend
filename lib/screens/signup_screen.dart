@@ -1,161 +1,154 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'otp_verification_screen.dart';
+import 'package:intl/intl.dart'; // Import for date formatting
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
-
+class SignupScreen extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  final TextEditingController _fullNameController = TextEditingController();
+class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _birthdayController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
 
+  // Function to show Date Picker
   Future<void> _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+      initialDate: DateTime(2000), // Default date
+      firstDate: DateTime(1900), // Earliest selectable date
+      lastDate: DateTime.now(), // Cannot pick future dates
     );
 
-    if (picked != null) {
+    if (pickedDate != null) {
       setState(() {
-        _birthdayController.text = DateFormat('MM/dd/yyyy').format(picked);
+        _birthdayController.text = DateFormat('MM/dd/yyyy').format(pickedDate);
       });
     }
-  }
-
-  void _continueToOTP() {
-    String fullName = _fullNameController.text.trim();
-    String birthday = _birthdayController.text.trim();
-    String email = _emailController.text.trim();
-
-    if (fullName.isEmpty || birthday.isEmpty || email.isEmpty) {
-      // Show error if any field is empty
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Please fill in all fields'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
-
-    // OTP Verification Screen
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => OtpVerificationScreen(email: email),
-      ),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.74,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
-      decoration: const BoxDecoration(
+      height: MediaQuery.of(context).size.height * 0.72,
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Let's Get Started",
-            style: GoogleFonts.leagueSpartan(
-              fontSize: 37,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          const SizedBox(height: 30),
-          Text(
-            "Create An Account Today And Step Into A World Of Endless Movies, Unforgettable Stories, And Cinematic Magic!",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.leagueSpartan(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: Colors.black54,
-            ),
-          ),
-          const SizedBox(height: 25),
-          _buildLabeledInputField("Full Name", _fullNameController),
-          const SizedBox(height: 20),
-          _buildLabeledInputField(
-            "Birthday",
-            _birthdayController,
-            isDatePicker: true,
-            onTap: () => _selectDate(context),
-          ),
-          const SizedBox(height: 20),
-          _buildLabeledInputField("Email", _emailController),
-          const SizedBox(height: 40),
-          SizedBox(
-            width: 215,
-            height: 48,
-            child: ElevatedButton(
-              onPressed: _continueToOTP,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF5F56D1),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              child: Text(
-                "Continue",
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Let's Get Started",
+              style: GoogleFonts.leagueSpartan(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ),
-          const SizedBox(height: 40),
-        ],
+            SizedBox(height: 8),
+            Text(
+              "Create an account today and step into a world of endless movies, unforgettable stories, and cinematic magic!",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.leagueSpartan(
+                fontSize: 14,
+                color: Colors.grey[600],
+              ),
+            ),
+            SizedBox(height: 20),
+            _buildInputField("Username"),
+            SizedBox(height: 12),
+            _buildInputField("Email"),
+            SizedBox(height: 12),
+            _buildBirthdayField(context), // Birthday field with Date Picker
+            SizedBox(height: 12),
+            _buildInputField("Password", obscureText: true),
+            SizedBox(height: 12),
+            _buildInputField("Confirm Password", obscureText: true),
+            SizedBox(height: 20),
+            _buildSignupButton(context),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildLabeledInputField(
-    String label,
-    TextEditingController controller, {
-    bool isDatePicker = false,
-    VoidCallback? onTap,
-  }) {
-    return SizedBox(
+  Widget _buildInputField(String label, {bool obscureText = false}) {
+    return Container(
       width: 380,
-      height: 58,
       child: TextFormField(
-        controller: controller,
-        readOnly: isDatePicker,
-        onTap: isDatePicker ? onTap : null,
+        obscureText: obscureText,
+        style: GoogleFonts.leagueSpartan(fontSize: 18),
         decoration: InputDecoration(
           labelText: label,
           labelStyle: GoogleFonts.leagueSpartan(
-            fontSize: 17,
+            fontSize: 20,
             fontWeight: FontWeight.w500,
             color: Colors.black87,
           ),
           floatingLabelBehavior: FloatingLabelBehavior.auto,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.grey),
+            borderSide: BorderSide(color: Colors.black38),
           ),
-          filled: true,
-          fillColor: Colors.white,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.black, width: 1.5),
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBirthdayField(BuildContext context) {
+    return Container(
+      width: 380,
+      child: TextFormField(
+        controller: _birthdayController,
+        readOnly: true, // Prevent manual input
+        style: GoogleFonts.leagueSpartan(fontSize: 18),
+        decoration: InputDecoration(
+          labelText: "Birthday",
+          labelStyle: GoogleFonts.leagueSpartan(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: Colors.black87,
+          ),
+          floatingLabelBehavior: FloatingLabelBehavior.auto,
+          suffixIcon: Icon(Icons.calendar_today, color: Colors.grey[600]),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.black38),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.black, width: 1.5),
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+        ),
+        onTap: () => _selectDate(context), // Show calendar on tap
+      ),
+    );
+  }
+
+  Widget _buildSignupButton(BuildContext context) {
+    return SizedBox(
+      width: 214,
+      height: 48,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context); // Close the sign-up form
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFF5F56D1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        child: Text(
+          "Continue",
+          style: TextStyle(fontSize: 16, color: Colors.white),
         ),
       ),
     );

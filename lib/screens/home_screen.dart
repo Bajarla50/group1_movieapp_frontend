@@ -24,9 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 15),
+            padding: EdgeInsets.only(right: 15),
             child: CircleAvatar(
               backgroundImage:
                   AssetImage('assets/profile.jpg'), // Replace with user image
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white),
               ),
               const SizedBox(height: 10),
-              Container(
+              SizedBox(
                 height: 200,
                 child: PageView(
                   children: [

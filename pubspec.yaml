@@ -23,5 +23,16 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - assets/June.jpg
+    - assets/Avengers Endgame.jpg
+    - assets/Batman.jpg
+    - assets/Arcane.jpg
+    - assets/Loki.png
+    - assets/Stranger Things.jpg
+    - assets/Adventure Time.jpg
+    - assets/Gravity Falls.jpeg
+    - assets/Rick and Morty.jpg
+    - assets/Star vs the Forces of Evil.jpg
 
 
