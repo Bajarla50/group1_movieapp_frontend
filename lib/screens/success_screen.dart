@@ -8,15 +8,7 @@ class SuccessScreen extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF131837),
-              Color(0xFF171D43),
-              Color(0xE0485297),
-            ],
-          ),
+          color: Color(0xFF202956), // Background color
         ),
         child: Center(
           child: Column(
@@ -27,21 +19,21 @@ class SuccessScreen extends StatelessWidget {
                 height: 150,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFF685EF5), // Outer circle (Purple)
+                  color: Color(0xFF685EF5),
                 ),
                 child: Center(
                   child: Container(
-                    width: 120, // Slightly smaller for inner white space
+                    width: 120,
                     height: 120,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.white, // Inner white circle
+                      color: Colors.white,
                     ),
                     child: Center(
                       child: Icon(
-                        Icons.check, // Check icon
-                        size: 80, // Adjust size inside the circle
-                        color: Color(0xFF685EF5), // Checkmark (Purple)
+                        Icons.check,
+                        size: 80,
+                        color: Color(0xFF685EF5),
                       ),
                     ),
                   ),
@@ -58,14 +50,17 @@ class SuccessScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                'Congratulations! You have been successfully authenticated.',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 16,
-                  color: Colors.white70,
+              Container(
+                width: 200,
+                child: Text(
+                  'Congratulations! You have been successfully authenticated.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 11,
+                    color: Colors.white70,
+                  ),
                 ),
-                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
               SizedBox(

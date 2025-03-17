@@ -1,4 +1,4 @@
-name: your_app_name
+name: movieapp
 description: A new Flutter project.
 
 publish_to: 'none' 
@@ -11,9 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.18.0  # Added for date formatting
+  intl: ^0.18.0  
   google_fonts: ^4.0.4
-  font_awesome_flutter: ^10.7.0  # Latest version as of now
+  font_awesome_flutter: ^10.7.0  
 
 dev_dependencies:
   flutter_test:
@@ -34,5 +34,13 @@ flutter:
     - assets/Gravity Falls.jpeg
     - assets/Rick and Morty.jpg
     - assets/Star vs the Forces of Evil.jpg
+    - assets/Popcorn.png
+    - assets/Verification boy.png
 
-
+fonts:
+    - family: MuseoModerno
+      fonts:
+        - asset: assets/fonts/MuseoModerno-Regular.ttf
+        - asset: assets/fonts/MuseoModerno-Bold.ttf
+        - asset: assets/fonts/MuseoModerno-Black.ttf
+          weight: 900

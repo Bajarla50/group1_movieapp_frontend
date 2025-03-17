@@ -1,160 +1,234 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'bookmark_screen.dart';
+import 'notification_screen.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController _searchController = TextEditingController();
+  int _currentSlide = 2; // For the dots indicator
   int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 15),
-            child: CircleAvatar(
-              backgroundImage:
-                  AssetImage('assets/profile.jpg'), // Replace with user image
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.black, Color(0xFF201F1F)],
+            stops: [0.525, 1.0],
           ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+        ),
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Trending Section
-              Text(
-                "Trending",
-                style: GoogleFonts.poppins(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+              SizedBox(height: 44),
+              // Search Bar
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18),
+                child: TextField(
+                  controller: _searchController,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    prefixIcon: Image.network(
+                        'https://dashboard.codeparrot.ai/api/image/Z9hQiCppvFKitUSn/material.png'),
+                    hintText: 'Search',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.1),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                ),
               ),
-              const SizedBox(height: 10),
-              SizedBox(
-                height: 200,
-                child: PageView(
+
+              // Trending Section
+              Padding(
+                padding: EdgeInsets.only(left: 13, top: 30),
+                child: Text(
+                  'Trending',
+                  style: TextStyle(
+                    fontFamily: 'PT Serif Caption',
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+
+              // Trending Carousel
+              Container(
+                height: 207,
+                margin: EdgeInsets.symmetric(vertical: 15),
+                child: Stack(
                   children: [
-                    _buildTrendingItem("Frozen 2", "assets/frozen2.jpg"),
-                    _buildTrendingItem("Dune", "assets/dune.jpg"),
-                    _buildTrendingItem("Spider-Man", "assets/spiderman.jpg"),
+                    Image.network(
+                      'https://dashboard.codeparrot.ai/api/image/Z9hQiCppvFKitUSn/image.png',
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned(
+                      bottom: 20,
+                      left: 20,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Frozen 2',
+                            style: TextStyle(
+                              fontFamily: 'Prata',
+                              fontSize: 32,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            'Musical   Animation  Family  Drama  Children\'s Film   Fantasy',
+                            style: TextStyle(
+                              fontFamily: 'Anek Kannada',
+                              fontSize: 10,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Dots Indicator
+                    Positioned(
+                      bottom: 20,
+                      right: 20,
+                      child: Row(
+                        children: List.generate(
+                          3,
+                          (index) => Container(
+                            margin: EdgeInsets.all(2),
+                            width: 7,
+                            height: 7,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: index == _currentSlide
+                                  ? Color(0xFF5C67D1)
+                                  : Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
 
               // For You Section
-              _buildSectionHeader("For You"),
-              const SizedBox(height: 10),
-              _buildHorizontalList([
-                "assets/movie1.jpg",
-                "assets/movie2.jpg",
-                "assets/movie3.jpg",
-                "assets/movie4.jpg",
-              ]),
-
-              const SizedBox(height: 20),
+              _buildSection('For You',
+                  'https://dashboard.codeparrot.ai/api/image/Z9hQiCppvFKitUSn/trend.png'),
 
               // Series Section
-              _buildSectionHeader("Series"),
-              const SizedBox(height: 10),
-              _buildHorizontalList([
-                "assets/series1.jpg",
-                "assets/series2.jpg",
-                "assets/series3.jpg",
-                "assets/series4.jpg",
-              ]),
+              _buildSection('Series',
+                  'https://dashboard.codeparrot.ai/api/image/Z9hQiCppvFKitUSn/series.png'),
+
+              // K-drama Section
+              _buildSection('K-drama',
+                  'https://dashboard.codeparrot.ai/api/image/Z9hQiCppvFKitUSn/kdrama.png'),
+
+              // Cartoon Section
+              _buildSection('Cartoon',
+                  'https://dashboard.codeparrot.ai/api/image/Z9hQiCppvFKitUSn/frame-9.png'),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.purple,
-        unselectedItemColor: Colors.white54,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+        backgroundColor: Colors.black,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Color(0xFF5C67D1),
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark), label: "Bookmarks"),
+              icon: Icon(Icons.bookmark), label: 'Bookmarks'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: "Notifications"),
+              icon: Icon(Icons.notifications), label: 'Notifications'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
     );
   }
 
-  Widget _buildTrendingItem(String title, String imagePath) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        image: DecorationImage(image: AssetImage(imagePath), fit: BoxFit.cover),
-      ),
-      alignment: Alignment.bottomLeft,
-      padding: const EdgeInsets.all(10),
-      child: Text(
-        title,
-        style: GoogleFonts.poppins(
-            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-      ),
-    );
-  }
-
-  Widget _buildSectionHeader(String title) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget _buildSection(String title, String imageUrl) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: GoogleFonts.poppins(
-              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 13),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontFamily: 'PT Serif Caption',
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'See More',
+                  style: TextStyle(
+                    fontFamily: 'League Spartan',
+                    fontSize: 20,
+                    color: Color(0xFF9F9F9F),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-        Text(
-          "See More",
-          style: GoogleFonts.poppins(fontSize: 14, color: Colors.purple),
+        Container(
+          height: 155,
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildHorizontalList(List<String> images) {
-    return SizedBox(
-      height: 160,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: images.length,
-        itemBuilder: (context, index) {
-          return Container(
-            width: 120,
-            margin: const EdgeInsets.only(right: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                  image: AssetImage(images[index]), fit: BoxFit.cover),
-            ),
-          );
-        },
-      ),
-    );
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BookmarkScreen()),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NotificationScreen()),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfileScreen()),
+        );
+        break;
+    }
   }
 }

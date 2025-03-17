@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/login_screen.dart';
+import 'screens/splash_screen.dart';
 
 void main() {
   runApp(const MovieApp());
@@ -12,8 +12,10 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      theme: ThemeData(
+        primaryColor: const Color(0xFF5C67D1),
+      ),
+      home: const SplashScreen(),
     );
   }
 }
-//add open animation daw katong popcorn

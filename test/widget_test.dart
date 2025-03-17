@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:your_app_name/screens/login_screen.dart';
+import 'package:movieapp/screens/login_screen.dart';
 
 void main() {
   testWidgets('Login Screen UI test', (WidgetTester tester) async {
