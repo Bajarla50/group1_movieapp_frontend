@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
     'assets/Adventure Time.jpg',
     'assets/Gravity Falls.jpeg',
     'assets/Rick and Morty.jpg',
-    'assets/Star vs the Forces of Evil.jpeg',
+    'assets/Star vs the Forces of Evil.jpg',
   ];
 
   late ScrollController _scrollController1;
