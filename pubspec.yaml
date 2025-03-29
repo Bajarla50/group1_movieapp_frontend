@@ -14,6 +14,8 @@ dependencies:
   intl: ^0.18.0  
   google_fonts: ^4.0.4
   font_awesome_flutter: ^10.7.0  
+  image_picker: ^1.1.2
+  provider: ^6.1.4
 
 dev_dependencies:
   flutter_test:
@@ -34,9 +36,17 @@ flutter:
     - assets/Gravity Falls.jpeg
     - assets/Rick and Morty.jpg
     - assets/Star vs the Forces of Evil.jpg
-    - assets/Popcorn.png
-    - assets/Verification boy.png
+    - assets/Frozen 2.png
+    - assets/Decendants.png
+    - assets/Ambut.png
+    - assets/Run On.png
 
+    - assets/Verification boy.png
+    - assets/Home Button.png
+    - assets/Library Button.png
+    - assets/Notification Button.png
+    - assets/Popcorn.png
+    - assets/Account Button.png
 fonts:
     - family: MuseoModerno
       fonts:

@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:movieapp/screens/signup_screen.dart';
-import 'home_screen.dart';
-import 'package:movieapp/screens/forgotpassword_screen.dart';
-import 'profile_screen.dart';
+import 'package:movieapp/screens/Login/signup_screen.dart';
+import '../HomePage/home_screen.dart';
+import 'package:movieapp/screens/Login/forgotpassword_screen.dart';
+import '../Profile/profile_screen.dart';
 
 void main() {
   runApp(MovieAppLogin());

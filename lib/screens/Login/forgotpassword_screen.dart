@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movieapp/screens/verificationcode_screen.dart';
+import 'package:movieapp/screens/Login/verificationcode_screen.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   @override
