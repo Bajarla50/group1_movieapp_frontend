@@ -42,6 +42,7 @@ class _AccountScreenState extends State<AccountScreen> {
     }
   }
 
+// calendar
   Future<void> _selectBirthdate(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     DateTime? picked = await showDatePicker(
@@ -55,6 +56,7 @@ class _AccountScreenState extends State<AccountScreen> {
     }
   }
 
+// delete
   void _confirmDeleteAccount() {
     showDialog(
       context: context,
@@ -82,6 +84,7 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
+// Account Title, Profile Picture and texts
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);

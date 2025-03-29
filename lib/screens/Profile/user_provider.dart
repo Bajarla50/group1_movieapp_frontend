@@ -4,7 +4,7 @@ import 'dart:io';
 class UserProvider with ChangeNotifier {
   String _username = "User";
   String _email = "Celestiang@Gmail.Com";
-  String _password = "********"; // Ensure this exists
+  String _password = "********";
   String _birthdate = "01/01/2000";
   File? _profileImage;
   File? _coverImage;
@@ -12,12 +12,12 @@ class UserProvider with ChangeNotifier {
   // Getters
   String get username => _username;
   String get email => _email;
-  String get password => _password; // Add this getter
+  String get password => _password;
   String get birthdate => _birthdate;
   File? get profileImage => _profileImage;
   File? get coverImage => _coverImage;
 
-  // Setters (Ensure password setter exists)
+  // Setters
   void updateUsername(String username) {
     _username = username;
     notifyListeners();

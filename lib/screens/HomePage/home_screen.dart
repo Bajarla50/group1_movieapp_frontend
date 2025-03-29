@@ -28,12 +28,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<double> iconSizes = [26, 20, 26, 26];
 
   final List<Widget> _screens = [
-    Container(), // Home content will be built directly inside the screen.
+    Container(),
     LibraryScreen(),
     NotificationsScreen(),
     ProfileScreen(),
   ];
-
+//add movies {'image': 'assets/image_path.jpg', 'screen': moviename()}
   final List<Map<String, dynamic>> trendingMovies = [
     {'image': 'assets/Frozen 2.jpg', 'screen': Frozen2Screen()},
     {'image': 'assets/Avengers Endgame.jpg', 'screen': AvengersEndgameScreen()},
@@ -98,6 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+// Bottom Navigation Bar
   Widget _buildBottomNavigationBar() {
     return Container(
       width: double.infinity,
@@ -131,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+// Bottom Navigation Bar colors
   BottomNavigationBarItem _buildNavItem(String assetPath, int index) {
     return BottomNavigationBarItem(
       icon: _selectedIndex == index
@@ -150,6 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+// category section
   Widget _buildHomeContent() {
     return SafeArea(
       child: SingleChildScrollView(
@@ -171,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+//search bar
   Widget _buildSearchBar() {
     return Center(
       child: Container(
@@ -209,6 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+//trending section
   Widget _buildTrendingSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -323,10 +328,10 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               right: 5,
               top: 5,
               child: Container(
-                width: 100, // Extends fully
+                width: 100,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: Color(0xFF616161), // Search input box
+                  color: Color(0xFF616161),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 padding: EdgeInsets.only(left: 10),
@@ -353,13 +358,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             // Enter Button (Above Search Box)
             Positioned(
               right: 5,
-              top: 5, // Slightly above search box
+              top: 5,
               child: Container(
                 width: 82,
                 height: 30,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Color(0xFF565656), // Enter button box
+                  color: Color(0xFF565656),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Text(

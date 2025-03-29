@@ -6,6 +6,7 @@ class NotificationsScreen extends StatefulWidget {
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
 
+// Notifications
 class _NotificationsScreenState extends State<NotificationsScreen> {
   final List<String> notifications = [
     "🎬 New for You! Based on your favorites, check out Godland!",
@@ -38,15 +39,15 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF05091D), // Solid color
-              Color(0xFF05091D), // Solid color
+              Color(0xFF05091D),
+              Color(0xFF05091D),
             ],
-            stops: [0.1, 0.9], // 10% to 90% position
+            stops: [0.1, 0.9],
           ),
         ),
         child: Stack(
           children: [
-            // "Notifications" Title
+            // Notifications Title
             Positioned(
               top: 60,
               left: 35,
@@ -60,7 +61,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               ),
             ),
 
-            // "Mark all as read" Button (Transparent)
+            // Mark all as read
             Positioned(
               top: 90,
               right: 16,
@@ -91,9 +92,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 itemCount: notifications.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: () => markAsRead(index), // Mark notification as read
+                    onTap: () => markAsRead(index),
                     child: Stack(
-                      clipBehavior: Clip.none, // Allows dot to be outside box
+                      clipBehavior: Clip.none,
                       children: [
                         // Notification Box
                         Container(
@@ -101,10 +102,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           width: 340,
                           height: 54,
                           decoration: BoxDecoration(
-                            color: Color(0xFF9D9696).withOpacity(
-                                readStatus[index]
-                                    ? 0.12
-                                    : 0.35), // Fades on click
+                            color: Color(0xFF9D9696)
+                                .withOpacity(readStatus[index] ? 0.12 : 0.35),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Padding(
@@ -126,8 +125,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
                         // Read Indicator Dot (Outside the box)
                         Positioned(
-                          left: -9, // Moves dot outside the box
-                          top: 19, // Centered vertically
+                          left: -9,
+                          top: 19,
                           child: AnimatedOpacity(
                             opacity: readStatus[index] ? 0.0 : 1.0,
                             duration: Duration(milliseconds: 300),

@@ -38,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            // "My Account" Title
+            // My Account Title
             Positioned(
               top: 55,
               left: 0,
@@ -57,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            // Profile Avatar (Updated to reflect changes)
+            // Profile Avatar
             Positioned(
               top: 110,
               left: 20,
@@ -71,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            // Username (Updated to reflect changes)
+            // Username
             Positioned(
               top: 265,
               left: 0,
@@ -79,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  userProvider.username, // Dynamically updated
+                  userProvider.username,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.leagueSpartan(
                     fontSize: 24,
