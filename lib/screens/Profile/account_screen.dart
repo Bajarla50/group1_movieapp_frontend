@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:movieapp/screens/Login/login_screen.dart';
 import 'package:movieapp/screens/Profile/user_provider.dart';
+import 'package:movieapp/screens/Profile/delete_account_screen.dart'; // Import DeleteAccountScreen
 
 class AccountScreen extends StatefulWidget {
   @override
@@ -56,35 +57,6 @@ class _AccountScreenState extends State<AccountScreen> {
     }
   }
 
-// delete
-  void _confirmDeleteAccount() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Delete Account"),
-        content: Text(
-            "Are you sure you want to delete your account? This action cannot be undone."),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text("Cancel"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => LoginScreen()),
-                (route) => false,
-              );
-            },
-            child: Text("Delete", style: TextStyle(color: Colors.red)),
-          ),
-        ],
-      ),
-    );
-  }
-
-// Account Title, Profile Picture and texts
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -128,7 +100,7 @@ class _AccountScreenState extends State<AccountScreen> {
               child: Container(
                 height: 140,
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey,
+                  color: Color(0xFF4F4C92),
                   image: userProvider.coverImage != null
                       ? DecorationImage(
                           image: FileImage(userProvider.coverImage!),
@@ -188,7 +160,13 @@ class _AccountScreenState extends State<AccountScreen> {
             left: 20,
             right: 20,
             child: TextButton(
-              onPressed: _confirmDeleteAccount,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DeleteAccountScreen()),
+                );
+              },
               child: Text(
                 "Delete Account",
                 style: TextStyle(color: Colors.red, fontSize: 18),
