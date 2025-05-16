@@ -35,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 //add movies {'image': 'assets/image_path.jpg', 'screen': moviename()}
   final List<Map<String, dynamic>> trendingMovies = [
-    {'image': 'assets/Frozen 2.jpg', 'screen': Frozen2Screen()},
-    {'image': 'assets/Avengers Endgame.jpg', 'screen': AvengersEndgameScreen()},
+    {'image': 'assets/Frozen 2(2).png', 'screen': Frozen2Screen()},
+    {'image': 'assets/Arcane(2).png', 'screen': ArcaneScreen()},
     {'image': 'assets/June.jpg', 'screen': JuneScreen()},
   ];
 
@@ -66,6 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
       'screen': StarVsForcesOfEvilScreen()
     },
   ];
+
+  List<Map<String, dynamic>> get allMovies => [
+        ...trendingMovies,
+        ...forYouMovies,
+        ...seriesMovies,
+        ...kDramaMovies,
+        ...cartoonMovies,
+      ];
 
   void _onItemTapped(int index) {
     setState(() {

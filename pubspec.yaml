@@ -30,6 +30,7 @@ flutter:
     - assets/Avengers Endgame.jpg
     - assets/Batman.jpg
     - assets/Arcane.jpg
+    - assets/Arcane(2).png
     - assets/Loki.png
     - assets/Stranger Things.jpg
     - assets/Adventure Time.jpg
@@ -37,6 +38,7 @@ flutter:
     - assets/Rick and Morty.jpg
     - assets/Star vs the Forces of Evil.jpg
     - assets/Frozen 2.png
+    - assets/Frozen 2(2).png
     - assets/Decendants.png
     - assets/Ambut.png
     - assets/Run On.png
@@ -47,6 +49,9 @@ flutter:
     - assets/Notification Button.png
     - assets/Popcorn.png
     - assets/Account Button.png
+    - assets/Book.png
+    - assets/Bookmark Icon.png
+    - assets/Star.png
 fonts:
     - family: MuseoModerno
       fonts:

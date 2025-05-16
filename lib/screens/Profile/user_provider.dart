@@ -8,6 +8,7 @@ class UserProvider with ChangeNotifier {
   String _birthdate = "01/01/2000";
   File? _profileImage;
   File? _coverImage;
+  List<String> _bookmarkedMovies = [];
 
   // Getters
   String get username => _username;
@@ -16,6 +17,7 @@ class UserProvider with ChangeNotifier {
   String get birthdate => _birthdate;
   File? get profileImage => _profileImage;
   File? get coverImage => _coverImage;
+  List<String> get bookmarkedMovies => _bookmarkedMovies;
 
   // Setters
   void updateUsername(String username) {
@@ -46,5 +48,22 @@ class UserProvider with ChangeNotifier {
   void updateCoverImage(File image) {
     _coverImage = image;
     notifyListeners();
+  }
+
+  // Bookmark Functions
+  void addToLibrary(String movie) {
+    if (!_bookmarkedMovies.contains(movie)) {
+      _bookmarkedMovies.add(movie);
+      notifyListeners();
+    }
+  }
+
+  void removeFromLibrary(String movie) {
+    _bookmarkedMovies.remove(movie);
+    notifyListeners();
+  }
+
+  bool isMovieBookmarked(String movie) {
+    return _bookmarkedMovies.contains(movie);
   }
 }
